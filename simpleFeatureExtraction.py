@@ -1,77 +1,16 @@
 import butter
 from scipy.interpolate import interp1d
-from joblib import Parallel, delayed
-from collections import deque
-from termcolor import colored
-from itertools import islice
 from scipy import signal
-import multiprocessing
 from scipy.fftpack import fft
 from collections import Counter
-from scipy.stats import mode
-import pandas as pd
 import numpy as np
-import tempfile
 import shutil
 import scipy
 import time
 import math
-import time
 import os
 
-import weka.core.jvm as jvm
-import weka.classifiers as weka_clf
-from weka.classifiers import Evaluation
-from weka.core.converters import Loader
-import weka.core.serialization as serialization
-
-POS_PATH = 'bin'
-
-TIME_DOMAIN = ["aX_t", "aY_t", "aZ_t", "aA_t", "gX_t", "gY_t", "gZ_t", "gA_t", "LP_aX_t", "LP_aY_t", "LP_aZ_t", "LP_aA_t", "LP_gX_t", "LP_gY_t", "LP_gZ_t", "LP_gA_t"]
-
-GRAVITY   = 9.79607
-clf_started = False
-
-def getMag(a):
-            return math.sqrt(sum(i**2 for i in a))
-
-def getAbs(a):
-    return abs(a)
-
-def getAmplitude(x,y,z):
-    lenx = len(x)
-    gravity = 9.79607
-    a = np.zeros(lenx)
-    for i in xrange(lenx):
-        print x[i]
-        a[i] = (math.sqrt((x[i]**2) + (y[i]**2) + (z[i]**2)) - gravity)
-    return a
-
-def sliding_window(iterable, size=2, step=1, fillvalue=None):
-    if size < 0 or step < 1:
-        raise ValueError
-    it = iter(iterable)
-    q = deque(islice(it, size), maxlen=size)
-    if not q:
-        return  # empty iterable or size == 0
-    q.extend(fillvalue for _ in range(size - len(q)))  # pad to size
-    while True:
-        yield iter(q)  # iter() to avoid accidental outside modifications
-        try:
-            q.append(next(it))
-        except StopIteration: # Python 3.5 pep 479 support
-            return
-        q.extend(next(it, fillvalue) for _ in range(step - 1))
-
-def sortTogether(idx, vals):
-    sorted_together =  sorted(zip(idx, vals))
-    sorted_idx = [x[0] for x in sorted_together]
-    sorted_vals = [x[1] for x in sorted_together]
-    return sorted_idx, sorted_vals
-
-def parseData_1D(iFile, Fout_Hz=16):
-    data = iFile.split(',')
-    t,x = sortTogether(idx=map(long, data[::2]), vals=map(float, data[1::2]))
+def parseData_3DLabeled(t,x,y,z,s,Fout_Hz, kind='linear', verbose=False):
     numSamples       = len(t)
     startTime        = min(t)
     stopTime         = max(t)
@@ -79,51 +18,25 @@ def parseData_1D(iFile, Fout_Hz=16):
     samplingRateHz   = 1000 * numSamples/float(durationMs)
     I_numSamples     = long(Fout_Hz * durationMs/1000)
     I_samplingRateHz = 1000 * I_numSamples/float(durationMs)
-    I_t              = np.linspace(startTime, stopTime, I_numSamples)
-    I_x              = interp1d(t, x)(I_t)
-    # print '---------------------------------------'
-    # print '[in]  START TIME   :', time.ctime(t[0]/1000)
-    # print '[in]  NUM SAMPLES  :', numSamples
-    # print '[in]  DURATION(ms)  :', durationMs
-    # print '[in]  DATA FREQ(Hz):', samplingRateHz
-    # print '[out] START TIME   :', time.ctime(I_t[0]/1000)
-    # print '[out] NUM SAMPLES  :', I_numSamples
-    # print '[out] DURATION(ms)  :', durationMs
-    # print '[out] DATA FREQ(Hz):', I_samplingRateHz
-    return (I_x)
-
-def parseData_3DLabeled(t,x,y,z,s,Fout_Hz, kind='linear'):
-    numSamples       = len(t)
-    startTime        = min(t)
-    stopTime         = max(t)
-    durationMs       = stopTime - startTime
-    samplingRateHz   = 1000 * numSamples/float(durationMs)
-    I_numSamples     = long(Fout_Hz * durationMs/1000)
-    I_samplingRateHz = 1000 * I_numSamples/float(durationMs)
-    print '---------------------------------------'
-    print '[in]  START TIME    :', time.ctime(t[0]/1000)
-    print '[in]  NUM SAMPLES   :', numSamples
-    print '[in]  DURATION(ms)  :', durationMs
-    print '[in]  DATA FREQ(Hz) :', samplingRateHz
 
     max_allowable_delay_ms = (1000.0/float(Fout_Hz)) * 10.0
 
     # sort the arrays
-    # idx = t.argsort(kind='mergesort')
-    # t = t[idx]
-    # #print x[t]
-    # x = x[t]
-    # y = y[t]
-    # z = z[t]
-    # s = s[t]
+    # if not assumeSorted:
+    #     idx = t.argsort(kind='mergesort')
+    #     t = t[idx]
+    #     x = x[idx]
+    #     y = y[idx]
+    #     z = z[idx]
+    #     s = s[idx]
 
     # find the time deltas
     dt = np.ediff1d(t.values)
     noticeable_lags = dt > max_allowable_delay_ms
     idx = np.argwhere(noticeable_lags).flatten()
+
     # set the label to -1 wherever the time deltas are greater than max_allowable_delay_ms
-    for i in idx:
-        s[i] = 0
+    for i in idx: s[i] = 0
 
     # interpolate the values
     I_t = np.linspace(startTime, stopTime, I_numSamples)
@@ -131,68 +44,20 @@ def parseData_3DLabeled(t,x,y,z,s,Fout_Hz, kind='linear'):
     I_y = interp1d(x=t, y=y, kind=kind, copy=False, assume_sorted=True)(I_t)
     I_z = interp1d(x=t, y=z, kind=kind, copy=False, assume_sorted=True)(I_t)
     I_s = interp1d(x=t, y=s, kind='zero', copy=False, assume_sorted=True)(I_t)
-    I_a = np.hypot(I_x, np.hypot(I_y, I_z))
 
-    print '[out] NUM UNKNOWNS  :', np.size(idx), (np.sum(noticeable_lags)) * 100.0 / float(durationMs)
-    print '[out] START TIME    :', time.ctime(I_t[0]/1000)
-    print '[out] NUM SAMPLES   :', I_numSamples
-    print '[out] DURATION(ms)  :', durationMs
-    print '[out] DATA FREQ(Hz) :', I_samplingRateHz
-    print '---------------------------------------'
+    if(np.size(idx) > 0) or verbose:
+        print '---------------------------------------'
+        print '[in]  START TIME    :', time.ctime(t[0]/1000)
+        print '[in]  NUM SAMPLES   :', numSamples
+        print '[in]  DURATION(ms)  :', durationMs
+        print '[in]  DATA FREQ(Hz) :', samplingRateHz
+        print '[out] NUM UNKNOWNS  :', np.size(idx), (np.sum(noticeable_lags)) * 100.0 / float(durationMs)
+        print '[out] START TIME    :', time.ctime(I_t[0]/1000)
+        print '[out] NUM SAMPLES   :', I_numSamples
+        print '[out] DURATION(ms)  :', durationMs
+        print '[out] DATA FREQ(Hz) :', I_samplingRateHz
+        print '---------------------------------------'
     return (I_t, I_x, I_y, I_z, I_s)
-
-def parseData_3D(t,x,y,z, Fout_Hz):
-    numSamples       = len(t)
-    startTime        = min(t)
-    stopTime         = max(t)
-    durationMs       = stopTime - startTime
-    samplingRateHz   = 1000 * numSamples/float(durationMs)
-    I_numSamples     = long(Fout_Hz * durationMs/1000)
-    I_samplingRateHz = 1000 * I_numSamples/float(durationMs)
-    print '---------------------------------------'
-    print '[in]  START TIME    :', time.ctime(t[0]/1000)
-    print '[in]  NUM SAMPLES   :', numSamples
-    print '[in]  DURATION(ms)  :', durationMs
-    print '[in]  DATA FREQ(Hz) :', samplingRateHz
-
-    if(samplingRateHz < 1):
-        print "Sampling Rate is too low for accurate prediction, quitting..."
-        exit(1)
-
-    I_t  = np.linspace(startTime, stopTime, I_numSamples)
-    I_x  = interp1d(t, x)(I_t)
-    I_y  = interp1d(t, y)(I_t)
-    I_z  = interp1d(t, z)(I_t)
-    print '[out] START TIME    :', time.ctime(I_t[0]/1000)
-    print '[out] NUM SAMPLES   :', I_numSamples
-    print '[out] DURATION(ms)  :', durationMs
-    print '[out] DATA FREQ(Hz) :', I_samplingRateHz
-    print '---------------------------------------'
-    return (I_t, I_x, I_y, I_z)
-
-def parseData_4D(t,x,y,z,a, Fout_Hz):
-    numSamples       = len(t)
-    startTime        = min(t)
-    stopTime         = max(t)
-    durationMs       = stopTime - startTime
-    samplingRateHz   = 1000 * numSamples/float(durationMs)
-    I_numSamples     = long(Fout_Hz * durationMs/1000)
-    I_samplingRateHz = 1000 * I_numSamples/float(durationMs)
-    print '---------------------------------------'
-    print '[in]  START TIME    :', time.ctime(t[0]/1000)
-    print '[in]  NUM SAMPLES   :', numSamples
-    print '[in]  DURATION(ms)  :', durationMs
-    print '[in]  DATA FREQ(Hz) :', samplingRateHz
-    print '[out] START TIME    :', time.ctime(I_t[0]/1000)
-    print '[out] NUM SAMPLES   :', I_numSamples
-    print '[out] DURATION(ms)  :', durationMs
-    print '[out] DATA FREQ(Hz) :', I_samplingRateHz
-    I_t              = np.linspace(startTime, stopTime, I_numSamples)
-    I_x              = interp1d(t, x)(I_t)
-    I_y              = interp1d(t, y)(I_t)
-    I_z              = interp1d(t, z)(I_t)
-    I_a              = interp1d(t, a)(I_t)
-    return (I_x, I_y, I_z, I_a)
 
 def getFFT2(y, fs):
     N = 2**(len(y)-1).bit_length()
