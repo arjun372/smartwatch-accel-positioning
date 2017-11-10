@@ -226,7 +226,7 @@ def writeARFF(df, name):
     tmpARFF.write('@data ')
     for singleLine in attrs:
         for value in singleLine:tmpARFF.write(str(value)+',')
-        tmpARFF.write('?\n')
+        tmpARFF.write('\n')
     tmpARFF.close()
     return tmpARFF
 
