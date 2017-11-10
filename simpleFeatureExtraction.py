@@ -113,11 +113,11 @@ def getLessFeatures(name, signal, samplingFreq):
         feature_labels.append('entropy_' + label)
         features.append(entropy)
 
-        feature_labels.append('pk_' + label)
-        features.append(pk_pwr)
+        feature_labels.append('ln(pk)_' + label)
+        features.append(np.log(pk_pwr))
 
-        feature_labels.append('energy_' + label)
-        features.append(pk_pwr_freq)
+        feature_labels.append('ln(energy)_' + label)
+        features.append(np.log(pk_pwr_freq))
 
         n, min_max, mean, var, skew, kur = scipy.stats.describe(signal)
         median = np.median(signal)
@@ -134,26 +134,26 @@ def getLessFeatures(name, signal, samplingFreq):
         feature_labels.append('mean_abs_dev_' + label)
         features.append(np.mean(np.absolute(signal - mean)))
 
-        # feature_labels.append('variance_' + label)
-        # features.append(var)
-        #
+        feature_labels.append('ln(var)_' + label)
+        features.append(np.log(var))
+
         # feature_labels.append('skew_' + label)
         # features.append(skew)
         #
         # feature_labels.append('kurtosis_' + label)
         # features.append(kur)
-        #
-        # feature_labels.append('std_err_mean_' + label)
-        # features.append(scipy.stats.sem(signal))
+
+        feature_labels.append('std_err_mean_' + label)
+        features.append(scipy.stats.sem(signal))
 
         feature_labels.append('median_' + label)
         features.append(median)
 
 
     T = 1.0/samplingFreq
-    N = len(signal)
+    N = 2**(len(signal)-1).bit_length()
     xf = np.linspace(0.0, 1.0/(2.0*T), N/2)
-
+    xf[0] = xf[1]/2.0
     for signal, label in zip(f_signals, f_signal_labels):
         #n, min_max, mean, var, skew, kur = scipy.stats.describe(signal)
         entropy, pk_pwr, pk_pwr_freq = calcEntropy(Y=signal, fs=samplingFreq)
@@ -162,15 +162,21 @@ def getLessFeatures(name, signal, samplingFreq):
         #median_idx = np.where(signal == )
         #print median_idx
         # median = xf[0]
-        # weakestFreq = np.min(signal)[0]#xf[int(np.argmin(signal))]
-        # strongestFreq = xf[int(np.argmax(signal))]
-        #
+
+        # weakestFreq = xf[int(np.argmin(signal))]
         # feature_labels.append('min_' + label)
         # features.append(weakestFreq)
         #
+
+        strongestFreq = xf[int(np.argmax(signal))]
+        energyOfStrongest = strongestFreq * np.max(signal)
+
+        totalEnergy = np.dot(signal, xf)
         # feature_labels.append('max_' + label)
         # features.append(strongestFreq)
 
+
+        #
         # feature_labels.append('mean_' + label)
         # features.append(mean)
         #
@@ -188,24 +194,35 @@ def getLessFeatures(name, signal, samplingFreq):
         #
         # feature_labels.append('std_err_mean_' + label)
         # features.append(scipy.stats.sem(signal))
-
+        #
         # feature_labels.append('median_' + label)
         # features.append(median)
-
+        #
         # feature_labels.append('median_abs_dev_' + label)
         # features.append(np.median(np.absolute(signal - median)))
-
+        #
         # feature_labels.append('median_dev_' + label)
         # features.append(np.median((signal - np.median(signal))))
 
         feature_labels.append('entropy_' + label)
         features.append(entropy)
 
-        feature_labels.append('pk_' + label)
-        features.append(pk_pwr)
+        feature_labels.append('ln(pk)_' + label)
+        features.append(np.log(pk_pwr))
 
-        feature_labels.append('energy_' + label)
-        features.append(pk_pwr_freq)
+        feature_labels.append('ln(energy)_' + label)
+        features.append(np.log(pk_pwr_freq))
+
+        feature_labels.append('ln(pwr_rat)_' + label)
+        features.append(np.log(energyOfStrongest/pk_pwr_freq))
+
+        feature_labels.append('tot_E_' + label)
+        features.append(totalEnergy)
+
+        feature_labels.append('pow_E_' + label)
+        features.append(energyOfStrongest/totalEnergy)
+
+        #print energyOfStrongest, totalEnergy, (energyOfStrongest/totalEnergy), energyOfStrongest, pk_pwr_freq, (energyOfStrongest/pk_pwr_freq)
 
     return [f for f in feature_labels], features
 
@@ -225,32 +242,45 @@ def writeARFF(df, name):
     tmpARFF.write(nominal[-1]+'}\n')
     tmpARFF.write('@data ')
     for singleLine in attrs:
-        for value in singleLine:tmpARFF.write(str(value)+',')
-        tmpARFF.write('\n')
+        for value in singleLine[:-1]:
+            tmpARFF.write(str(value) + ',')
+        tmpARFF.write(str(singleLine[-1]) + '\n')
     tmpARFF.close()
     return tmpARFF
 
 def getMajorityLabel_Nominal(data):
-    moving = ['running', 'walking', 'hemi', 'four-leg-walker', 'single-leg-walker', 'crutches', 'walker', 'flat', 'downstairs', 'upstairs']
+    assisted = ['hemi', 'four-leg-walker', 'single-leg-walker', 'crutches', 'walker']
+    moving = ['running', 'walking', 'flat', 'downstairs', 'upstairs']
     stationary = ['stationary', 'sitting', 'standing', 'laying_down']
+    sit_stand = ['sitting', 'standing']
     l = data.tolist()
-
-    # Return ? if even a single label here is unknown
-    if '?' in l:
-        return '?'
 
     # Else, check for the majority label
     l2 = []
     for s in l :
-        if s in stationary:
-            l2.append('stationary')
+        # Return ? if even a single label here is unknown
+        if s == '?':
+            return '?'
+
+        # if s in stationary:
+        #     l2.append('stationary')
+        #     continue
+
+        if s == 'stationary':
+            return '?'
+
+        if s in assisted:
+            l2.append('assisted_walking')
             continue
-        #if s == 'stationary':
-        #    l2.append('?')
-        #    continue
-        elif s in moving:
-            l2.append('moving')
+
+        if s in moving:
+            l2.append('walking')
             continue
+
+        if s in sit_stand:
+            l2.append('sit_stand')
+            continue
+
         else:
             l2.append(s)
             continue
