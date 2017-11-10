@@ -269,11 +269,11 @@ def getMajorityLabel_Nominal(data):
         if s == 'stationary':
             return '?'
 
-        if s in assisted:
-            l2.append('assisted_walking')
-            continue
+        # if s in assisted:
+        #     l2.append('assisted_walking')
+        #     continue
 
-        if s in moving:
+        if s in moving or s in assisted:
             l2.append('walking')
             continue
 
