@@ -77,12 +77,13 @@ if __name__ == "__main__":
     l = df['class']
     a = np.hypot(x, np.hypot(y, z))
 
-    # t = t[:100]
-    # x = x[:100]
-    # y = y[:100]
-    # z = z[:100]
-    # l = l[:100]
-    # a = a[:100]
+    # window = int(fs*10)
+    # t = t[:window]
+    # x = x[:window]
+    # y = y[:window]
+    # z = z[:window]
+    # l = l[:window]
+    # a = a[:window]
 
 
     plot5D("Raw acceleration", t, x, y, z, a, l)
@@ -95,6 +96,10 @@ if __name__ == "__main__":
 
     pitch, roll = angles.pitch_roll(x, y, z)
     deltas = angles.get_angle_changes(x.tolist(), y.tolist(), z.tolist())
-    plotAngles("Pitch & Roll & Angle Deltas", GT, pitch, roll, deltas, l)
+    plotAngles("Pitch & Roll & Angle Deltas", t, pitch, roll, deltas, l)
+
+    Gpitch, Groll = angles.pitch_roll(GX, GY, GZ)
+    Gdeltas = angles.get_angle_changes(GX, GY, GZ)
+    plotAngles("Low-Passed - Pitch & Roll & Angle Deltas", GT, Gpitch, Groll, Gdeltas, l)
 
     plt.show()
