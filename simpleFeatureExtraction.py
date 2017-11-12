@@ -131,8 +131,8 @@ def getLessFeatures(name, signal, samplingFreq):
         feature_labels.append('mean_' + label)
         features.append(mean)
 
-        feature_labels.append('mean_abs_dev_' + label)
-        features.append(np.mean(np.absolute(signal - mean)))
+        feature_labels.append('ln(mean_abs_dev)_' + label)
+        features.append(np.log(np.mean(np.absolute(signal - mean))))
 
         feature_labels.append('ln(var)_' + label)
         features.append(np.log(var))
@@ -143,8 +143,8 @@ def getLessFeatures(name, signal, samplingFreq):
         # feature_labels.append('kurtosis_' + label)
         # features.append(kur)
 
-        feature_labels.append('std_err_mean_' + label)
-        features.append(scipy.stats.sem(signal))
+        feature_labels.append('ln(std_err_mean)_' + label)
+        features.append(np.log(scipy.stats.sem(signal)))
 
         feature_labels.append('median_' + label)
         features.append(median)

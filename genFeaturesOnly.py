@@ -93,6 +93,7 @@ def importLabeledFileInterpolated(file_, fs, named=True, verbose=False):
     df['aX'] = x
     df['aY'] = y
     df['aZ'] = z
+    df['aA'] = np.hypot(x, np.hypot(y, z))
 
     if not named:
         df[LABEL_COLUMN] = s
@@ -121,25 +122,28 @@ def buildFeatureFrame(df, Fs, N):
     x = df['aX']
     y = df['aY']
     z = df['aZ']
+    a = df['aA']
 
-    LT, LX, LY, LZ, LA = angles.linearize(t=t, x=x, y=y, z=z, cutoff=1.0, fs=Fs, order=1)
-    GT, GX, GY, GZ, GA = angles.gravity(t=t, x=x, y=y, z=z, cutoff=0.25, fs=Fs, order=1)
+    LX, LY, LZ, LA, LS = angles.linearize(x=x, y=y, z=z, a=a, cutoff=1.0, fs=Fs, order=1)
+    GX, GY, GZ, GA, GS = angles.gravity(x=x, y=y, z=z, a=a, cutoff=0.25, fs=Fs, order=1)
 
     PTCH, ROLL = angles.pitch_roll(x, y, z)
-    DELT = angles.get_angle_changes(x.tolist(), y.tolist(), z.tolist())
+    DELT = angles.get_angle_changes(x.tolist(), y.tolist(), z.tolist(), a.tolist())
 
     GPTCH, GROLL = angles.pitch_roll(GX, GY, GZ)
-    GDELT = angles.get_angle_changes(GX, GY, GZ)
+    GDELT = angles.get_angle_changes(GX, GY, GZ, GS)
 
     GXL, GXF = fe.getLessFeatures(name="GX", signal=GX, samplingFreq=Fs)
     GYL, GYF = fe.getLessFeatures(name="GY", signal=GY, samplingFreq=Fs)
     GZL, GZF = fe.getLessFeatures(name="GZ", signal=GZ, samplingFreq=Fs)
     GAL, GAF = fe.getLessFeatures(name="GA", signal=GA, samplingFreq=Fs)
+    GSL, GSF = fe.getLessFeatures(name="GS", signal=GS, samplingFreq=Fs)
 
     LXL, LXF = fe.getLessFeatures(name="LX", signal=LX, samplingFreq=Fs)
     LYL, LYF = fe.getLessFeatures(name="LY", signal=LY, samplingFreq=Fs)
     LZL, LZF = fe.getLessFeatures(name="LZ", signal=LZ, samplingFreq=Fs)
     LAL, LAF = fe.getLessFeatures(name="LA", signal=LA, samplingFreq=Fs)
+    LSL, LSF = fe.getLessFeatures(name="LS", signal=LS, samplingFreq=Fs)
 
     GPL, GPF = fe.getLessFeatures(name="G_PTCH", signal=GPTCH, samplingFreq=Fs)
     GRL, GRF = fe.getLessFeatures(name="G_ROLL", signal=GROLL, samplingFreq=Fs)
@@ -149,7 +153,7 @@ def buildFeatureFrame(df, Fs, N):
     LRL, LRF = fe.getLessFeatures(name="ROLL", signal=ROLL, samplingFreq=Fs)
     LDL, LDF = fe.getLessFeatures(name="DELT", signal=DELT, samplingFreq=Fs)
 
-    data = pd.DataFrame([GXF + GYF + GZF + GAF + LXF + LYF + LZF + LAF + GPF + GRF + GDF + LPF + LRF + LDF + [label]], columns=(GXL + GYL + GZL + GAL + LXL + LYL + LZL + LAL + GPL + GRL + GDL + LPL + LRL + LDL + ['class']), index=idx)
+    data = pd.DataFrame([GXF + GYF + GZF + GAF + GSF + LXF + LYF + LZF + LAF + LSF + GPF + GRF + GDF + LPF + LRF + LDF + [label]], columns=(GXL + GYL + GZL + GAL + GSL + LXL + LYL + LZL + LAL + LSL + GPL + GRL + GDL + LPL + LRL + LDL + ['class']), index=idx)
     return data
 
 def generateFeatures(raw_dframe, window, fs, overlap, ignore_idx=True):
@@ -177,5 +181,5 @@ if __name__ == "__main__":
     generated_features = pd.concat((generateFeatures)(df, window=float(args.windowlen), fs=float(args.fs), overlap=float(args.overlap), ignore_idx=True) for df in raw_df)
     print 'Exporting', len(generated_features), 'instances of feature data'
 
-    fe.writeARFF(df=generated_features, name=args.out)
+    fe.writeARFF(df=generated_features.sample(frac=1), name=args.out)
     print 'done...'

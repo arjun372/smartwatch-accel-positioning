@@ -1,0 +1,528 @@
+=== Run information ===
+
+Scheme:       weka.classifiers.functions.MultilayerPerceptron -L 0.05 -M 0.9 -N 80 -V 0 -S 0 -E 20 -H 2 -G -R -D -do-not-check-capabilities
+Relation:     train_all.arff
+Instances:    5437
+Attributes:   225
+              [list of attributes omitted]
+Test mode:    user supplied test set:  size unknown (reading incrementally)
+
+=== Classifier model (full training set) ===
+
+Sigmoid Node 0
+    Inputs    Weights
+    Threshold    0.2844630617538701
+    Node 3    3.3274564091084193
+    Node 4    -6.615486447106366
+Sigmoid Node 1
+    Inputs    Weights
+    Threshold    -9.366568790668572
+    Node 3    6.073074576448694
+    Node 4    6.123239824354785
+Sigmoid Node 2
+    Inputs    Weights
+    Threshold    0.9069387002220235
+    Node 3    -7.538974492282564
+    Node 4    2.762864133256888
+Sigmoid Node 3
+    Inputs    Weights
+    Threshold    0.33229550089019194
+    Attrib entropy_DELT    -0.5616771346751195
+    Attrib entropy_FFT_DELT    -0.865496890047534
+    Attrib entropy_FFT_GA    -0.7839832437148161
+    Attrib entropy_FFT_GX    -0.5338624637131416
+    Attrib entropy_FFT_GY    -0.5121093684439847
+    Attrib entropy_FFT_GZ    0.5454910228510096
+    Attrib entropy_FFT_G_DELT    -0.525469321232186
+    Attrib entropy_FFT_G_PTCH    -0.2694152658689024
+    Attrib entropy_FFT_G_ROLL    -0.5338912503095588
+    Attrib entropy_FFT_LA    -2.200637668945912
+    Attrib entropy_FFT_LX    -2.2650908174087525
+    Attrib entropy_FFT_LY    0.9058714681789286
+    Attrib entropy_FFT_LZ    -0.23324265856686985
+    Attrib entropy_FFT_PTCH    1.4269355814881277
+    Attrib entropy_FFT_ROLL    1.6284689842436335
+    Attrib entropy_GA    0.4182408672121868
+    Attrib entropy_GX    -0.8419528825106768
+    Attrib entropy_GY    -0.3218846442610577
+    Attrib entropy_GZ    -0.5704043772394074
+    Attrib entropy_G_DELT    -1.6467569453692965
+    Attrib entropy_G_PTCH    -0.8232678182473673
+    Attrib entropy_G_ROLL    -0.9380695236605823
+    Attrib entropy_LA    -2.01456890186795
+    Attrib entropy_LX    0.8509804791660247
+    Attrib entropy_LY    0.4284461806889028
+    Attrib entropy_LZ    1.6238236980148577
+    Attrib entropy_PTCH    0.3058924612720982
+    Attrib entropy_ROLL    0.20410544173260922
+    Attrib ln(energy)_DELT    -0.05967424796655634
+    Attrib ln(energy)_FFT_DELT    -0.5263822696972297
+    Attrib ln(energy)_FFT_GA    -0.46127692820078503
+    Attrib ln(energy)_FFT_GX    -0.4244712803796225
+    Attrib ln(energy)_FFT_GY    -0.29585679549596877
+    Attrib ln(energy)_FFT_GZ    0.041723444104132756
+    Attrib ln(energy)_FFT_G_DELT    -0.5290366247259296
+    Attrib ln(energy)_FFT_G_PTCH    -0.15155244571523052
+    Attrib ln(energy)_FFT_G_ROLL    -0.49710629965259645
+    Attrib ln(energy)_FFT_LA    -1.856147291654047
+    Attrib ln(energy)_FFT_LX    -3.124211516958656
+    Attrib ln(energy)_FFT_LY    0.26012337019226883
+    Attrib ln(energy)_FFT_LZ    -0.24514994345825689
+    Attrib ln(energy)_FFT_PTCH    -0.38993333967220506
+    Attrib ln(energy)_FFT_ROLL    -0.4947868836274242
+    Attrib ln(energy)_GA    -0.25777135695736975
+    Attrib ln(energy)_GX    -0.4654641873467588
+    Attrib ln(energy)_GY    0.23553888033955034
+    Attrib ln(energy)_GZ    2.186025711566627
+    Attrib ln(energy)_G_DELT    0.049942283051927536
+    Attrib ln(energy)_G_PTCH    -0.16024701297986596
+    Attrib ln(energy)_G_ROLL    -0.515943047739215
+    Attrib ln(energy)_LA    -1.054590259620448
+    Attrib ln(energy)_LX    -3.331422702183104
+    Attrib ln(energy)_LY    -0.06785035583926868
+    Attrib ln(energy)_LZ    -0.4071130304684749
+    Attrib ln(energy)_PTCH    -0.386761541324624
+    Attrib ln(energy)_ROLL    -0.26739048638304147
+    Attrib ln(pk)_DELT    0.3258769716373489
+    Attrib ln(pk)_FFT_DELT    -0.29340005203277664
+    Attrib ln(pk)_FFT_GA    -0.32589449386671904
+    Attrib ln(pk)_FFT_GX    -0.3124504208306296
+    Attrib ln(pk)_FFT_GY    -0.29977459428974007
+    Attrib ln(pk)_FFT_GZ    -0.35158385638310635
+    Attrib ln(pk)_FFT_G_DELT    -0.3055779099267684
+    Attrib ln(pk)_FFT_G_PTCH    -0.11350213349966999
+    Attrib ln(pk)_FFT_G_ROLL    -0.38209380064371956
+    Attrib ln(pk)_FFT_LA    -1.1916410986338752
+    Attrib ln(pk)_FFT_LX    -2.483325941911634
+    Attrib ln(pk)_FFT_LY    0.4110301203903971
+    Attrib ln(pk)_FFT_LZ    0.03071835082645197
+    Attrib ln(pk)_FFT_PTCH    -0.5750453891122219
+    Attrib ln(pk)_FFT_ROLL    -0.8307076903598279
+    Attrib ln(pk)_GA    -0.4584737258088235
+    Attrib ln(pk)_GX    -0.33042789434865155
+    Attrib ln(pk)_GY    0.196325945477944
+    Attrib ln(pk)_GZ    1.8252062042774189
+    Attrib ln(pk)_G_DELT    0.8847452836550117
+    Attrib ln(pk)_G_PTCH    -0.09884007095974459
+    Attrib ln(pk)_G_ROLL    -0.3167665095883195
+    Attrib ln(pk)_LA    -0.19478699341611358
+    Attrib ln(pk)_LX    -3.567784584213064
+    Attrib ln(pk)_LY    -0.026967015957770613
+    Attrib ln(pk)_LZ    -0.5641062154705518
+    Attrib ln(pk)_PTCH    -0.20131731127591657
+    Attrib ln(pk)_ROLL    -0.33343572586639364
+    Attrib ln(pwr_rat)_FFT_DELT    0.24370904857443507
+    Attrib ln(pwr_rat)_FFT_GA    0.46175853755289553
+    Attrib ln(pwr_rat)_FFT_GX    0.3441584708024812
+    Attrib ln(pwr_rat)_FFT_GY    0.4556505461275403
+    Attrib ln(pwr_rat)_FFT_GZ    -0.10075746634392821
+    Attrib ln(pwr_rat)_FFT_G_DELT    0.6972755884125765
+    Attrib ln(pwr_rat)_FFT_G_PTCH    0.2552908094905155
+    Attrib ln(pwr_rat)_FFT_G_ROLL    0.32282209008038604
+    Attrib ln(pwr_rat)_FFT_LA    1.9696597169560737
+    Attrib ln(pwr_rat)_FFT_LX    2.6912976915179923
+    Attrib ln(pwr_rat)_FFT_LY    -0.9370308780572362
+    Attrib ln(pwr_rat)_FFT_LZ    -0.22675382646775016
+    Attrib ln(pwr_rat)_FFT_PTCH    0.24644445830428185
+    Attrib ln(pwr_rat)_FFT_ROLL    -0.08937913128756364
+    Attrib ln(var)_DELT    0.40244896673414743
+    Attrib ln(var)_GA    -1.3052757240931263
+    Attrib ln(var)_GX    -0.2289981336293029
+    Attrib ln(var)_GY    0.4783518295801251
+    Attrib ln(var)_GZ    1.216317933921144
+    Attrib ln(var)_G_DELT    0.10451813923032106
+    Attrib ln(var)_G_PTCH    0.8961299304270358
+    Attrib ln(var)_G_ROLL    0.3181063248124773
+    Attrib ln(var)_LA    -0.28594063425064187
+    Attrib ln(var)_LX    -3.3814515331559125
+    Attrib ln(var)_LY    0.28205829123810444
+    Attrib ln(var)_LZ    -0.28183581888236625
+    Attrib ln(var)_PTCH    -0.05004336198513934
+    Attrib ln(var)_ROLL    -0.4115417660189386
+    Attrib max_DELT    0.7760299627746928
+    Attrib max_GA    -0.7301057864427759
+    Attrib max_GX    -0.7812512489742515
+    Attrib max_GY    -0.3269637865539414
+    Attrib max_GZ    0.018255458260379054
+    Attrib max_G_DELT    -0.34665767098223815
+    Attrib max_G_PTCH    0.5406240923798185
+    Attrib max_G_ROLL    0.17160372305823343
+    Attrib max_LA    -0.46570413853655035
+    Attrib max_LX    -1.819919360332275
+    Attrib max_LY    0.524926350844408
+    Attrib max_LZ    0.2452924467432831
+    Attrib max_PTCH    -0.2887039804571829
+    Attrib max_ROLL    -0.11186747763613704
+    Attrib mean_DELT    -0.12448214532859085
+    Attrib mean_GA    -0.4231553214369646
+    Attrib mean_GX    -0.4032565838745441
+    Attrib mean_GY    0.1383253261668922
+    Attrib mean_GZ    -1.1575247432562232
+    Attrib mean_G_DELT    0.8200401236977738
+    Attrib mean_G_PTCH    -0.0011315533148484563
+    Attrib mean_G_ROLL    0.11955894672900678
+    Attrib mean_LA    -0.8229359184238244
+    Attrib mean_LX    0.06346272302520414
+    Attrib mean_LY    0.2290376548524343
+    Attrib mean_LZ    -0.23160396832302285
+    Attrib mean_PTCH    0.12542589811403435
+    Attrib mean_ROLL    -0.18865968670553104
+    Attrib mean_abs_dev_DELT    1.310161225996509
+    Attrib mean_abs_dev_GA    -0.6682962016567648
+    Attrib mean_abs_dev_GX    -0.23953188666912445
+    Attrib mean_abs_dev_GY    -0.35165697964327486
+    Attrib mean_abs_dev_GZ    1.9129889591462341
+    Attrib mean_abs_dev_G_DELT    0.36309238388882326
+    Attrib mean_abs_dev_G_PTCH    0.25530720240061716
+    Attrib mean_abs_dev_G_ROLL    0.2234119163507825
+    Attrib mean_abs_dev_LA    0.12270628359370947
+    Attrib mean_abs_dev_LX    -2.220970244076865
+    Attrib mean_abs_dev_LY    -0.21361980064162156
+    Attrib mean_abs_dev_LZ    -0.015264185012363886
+    Attrib mean_abs_dev_PTCH    0.5153667957397638
+    Attrib mean_abs_dev_ROLL    -0.11303529187393564
+    Attrib median_DELT    -0.7487860524264215
+    Attrib median_GA    -0.21472298136280857
+    Attrib median_GX    -0.535822209660245
+    Attrib median_GY    0.5436444382021921
+    Attrib median_GZ    -1.202691763813133
+    Attrib median_G_DELT    1.4656542151990832
+    Attrib median_G_PTCH    0.22756291604558032
+    Attrib median_G_ROLL    0.12065698595769063
+    Attrib median_LA    -1.0066121183417571
+    Attrib median_LX    -0.285125537945822
+    Attrib median_LY    -0.4695240826241307
+    Attrib median_LZ    0.41737326927778867
+    Attrib median_PTCH    0.2662200573045361
+    Attrib median_ROLL    -0.3609654714628616
+    Attrib min_DELT    -2.0963094390858097
+    Attrib min_GA    0.0863422139087076
+    Attrib min_GX    0.27974617644926647
+    Attrib min_GY    0.22282607224828424
+    Attrib min_GZ    -1.9171979200689353
+    Attrib min_G_DELT    0.7047404668277131
+    Attrib min_G_PTCH    -0.46486863256773175
+    Attrib min_G_ROLL    0.07368595248720525
+    Attrib min_LA    -0.7967649678563127
+    Attrib min_LX    1.2965282211135791
+    Attrib min_LY    -0.1792736336721811
+    Attrib min_LZ    -0.6524528576577607
+    Attrib min_PTCH    -0.7814913418281036
+    Attrib min_ROLL    -0.6906662111890205
+    Attrib pow_E_FFT_DELT    -1.0997791133285526
+    Attrib pow_E_FFT_GA    0.8655414351176156
+    Attrib pow_E_FFT_GX    -0.2727393295571878
+    Attrib pow_E_FFT_GY    0.16110141935062425
+    Attrib pow_E_FFT_GZ    -0.2699147564067155
+    Attrib pow_E_FFT_G_DELT    -0.14493502925303095
+    Attrib pow_E_FFT_G_PTCH    -0.382512900064383
+    Attrib pow_E_FFT_G_ROLL    -1.4389364280749788
+    Attrib pow_E_FFT_LA    -1.639678211309758
+    Attrib pow_E_FFT_LX    -1.1426580826973147
+    Attrib pow_E_FFT_LY    -1.019089871575571
+    Attrib pow_E_FFT_LZ    -1.506971328616734
+    Attrib pow_E_FFT_PTCH    0.5938986934533212
+    Attrib pow_E_FFT_ROLL    0.9774577501021321
+    Attrib std_err_mean_DELT    1.3842052128667073
+    Attrib std_err_mean_GA    -0.6346858053427098
+    Attrib std_err_mean_GX    -0.41972015702226056
+    Attrib std_err_mean_GY    -0.36606988890410813
+    Attrib std_err_mean_GZ    1.9160523135379484
+    Attrib std_err_mean_G_DELT    -0.08605575590974619
+    Attrib std_err_mean_G_PTCH    0.3497558847802948
+    Attrib std_err_mean_G_ROLL    0.032897278882960526
+    Attrib std_err_mean_LA    -0.030471708786209972
+    Attrib std_err_mean_LX    -1.8946171952604411
+    Attrib std_err_mean_LY    -0.0410642734596839
+    Attrib std_err_mean_LZ    0.3783845587918816
+    Attrib std_err_mean_PTCH    0.5001212919623252
+    Attrib std_err_mean_ROLL    -0.12855729632152238
+    Attrib tot_E_FFT_DELT    0.5327893151435309
+    Attrib tot_E_FFT_GA    -0.8364411018182125
+    Attrib tot_E_FFT_GX    -1.109841760319846
+    Attrib tot_E_FFT_GY    -0.4680225857629439
+    Attrib tot_E_FFT_GZ    2.3351981440062195
+    Attrib tot_E_FFT_G_DELT    -0.13642465958988684
+    Attrib tot_E_FFT_G_PTCH    -0.15746218940389356
+    Attrib tot_E_FFT_G_ROLL    -0.47112620562905594
+    Attrib tot_E_FFT_LA    -0.6083832478358717
+    Attrib tot_E_FFT_LX    -2.2938288093011097
+    Attrib tot_E_FFT_LY    -0.2805153012148493
+    Attrib tot_E_FFT_LZ    -0.2588570062810003
+    Attrib tot_E_FFT_PTCH    0.2362082343321231
+    Attrib tot_E_FFT_ROLL    -0.6501897323542388
+Sigmoid Node 4
+    Inputs    Weights
+    Threshold    0.2765368665248112
+    Attrib entropy_DELT    0.5427017232429612
+    Attrib entropy_FFT_DELT    -1.0437451222137477
+    Attrib entropy_FFT_GA    -0.2684769140245481
+    Attrib entropy_FFT_GX    -0.27326500832741596
+    Attrib entropy_FFT_GY    -0.04302418954457464
+    Attrib entropy_FFT_GZ    -0.2874967460198576
+    Attrib entropy_FFT_G_DELT    -0.5564753189311233
+    Attrib entropy_FFT_G_PTCH    -0.22471525296398862
+    Attrib entropy_FFT_G_ROLL    -0.28403599638140914
+    Attrib entropy_FFT_LA    -1.4457219251992106
+    Attrib entropy_FFT_LX    0.4169405327454185
+    Attrib entropy_FFT_LY    2.5188288884214485
+    Attrib entropy_FFT_LZ    0.8827841225749163
+    Attrib entropy_FFT_PTCH    0.49543021434542367
+    Attrib entropy_FFT_ROLL    0.5118482801493593
+    Attrib entropy_GA    -0.08082602986633666
+    Attrib entropy_GX    -0.12200645497709674
+    Attrib entropy_GY    0.205192074831446
+    Attrib entropy_GZ    -0.06554127511524256
+    Attrib entropy_G_DELT    0.7813975980919028
+    Attrib entropy_G_PTCH    0.19487952533580388
+    Attrib entropy_G_ROLL    -0.1591420761391853
+    Attrib entropy_LA    0.9052119575579849
+    Attrib entropy_LX    0.4890610083896504
+    Attrib entropy_LY    2.0393778438066814
+    Attrib entropy_LZ    0.8685263379598692
+    Attrib entropy_PTCH    0.8635355337199507
+    Attrib entropy_ROLL    0.3758324072485045
+    Attrib ln(energy)_DELT    0.9766250105913707
+    Attrib ln(energy)_FFT_DELT    0.5999839288035258
+    Attrib ln(energy)_FFT_GA    -0.37448799015364037
+    Attrib ln(energy)_FFT_GX    -0.2150787200971923
+    Attrib ln(energy)_FFT_GY    0.8198284273456813
+    Attrib ln(energy)_FFT_GZ    -0.4642005692186231
+    Attrib ln(energy)_FFT_G_DELT    1.0761461350127142
+    Attrib ln(energy)_FFT_G_PTCH    0.9689550179132698
+    Attrib ln(energy)_FFT_G_ROLL    -0.010420980888041699
+    Attrib ln(energy)_FFT_LA    0.6900171318157122
+    Attrib ln(energy)_FFT_LX    0.9885257953338622
+    Attrib ln(energy)_FFT_LY    1.1232974187178248
+    Attrib ln(energy)_FFT_LZ    0.49688063557585826
+    Attrib ln(energy)_FFT_PTCH    1.21761942734619
+    Attrib ln(energy)_FFT_ROLL    0.046044311544192223
+    Attrib ln(energy)_GA    -0.3236876784666262
+    Attrib ln(energy)_GX    -0.17785924325236088
+    Attrib ln(energy)_GY    1.0025549553721749
+    Attrib ln(energy)_GZ    -0.4713715060636471
+    Attrib ln(energy)_G_DELT    0.9619174477329159
+    Attrib ln(energy)_G_PTCH    1.080081403740662
+    Attrib ln(energy)_G_ROLL    -0.13405341373124946
+    Attrib ln(energy)_LA    0.9222949712483106
+    Attrib ln(energy)_LX    1.0898490423431708
+    Attrib ln(energy)_LY    0.9921241985605447
+    Attrib ln(energy)_LZ    0.3963569864076373
+    Attrib ln(energy)_PTCH    1.327953995497438
+    Attrib ln(energy)_ROLL    0.15985109027699673
+    Attrib ln(pk)_DELT    0.8013364330982128
+    Attrib ln(pk)_FFT_DELT    1.146029944119593
+    Attrib ln(pk)_FFT_GA    -0.4253855659515845
+    Attrib ln(pk)_FFT_GX    -0.1590906221571748
+    Attrib ln(pk)_FFT_GY    0.7906165811407375
+    Attrib ln(pk)_FFT_GZ    -0.3980918211556293
+    Attrib ln(pk)_FFT_G_DELT    0.9962413427412151
+    Attrib ln(pk)_FFT_G_PTCH    1.1137474874232394
+    Attrib ln(pk)_FFT_G_ROLL    -0.044247360287805834
+    Attrib ln(pk)_FFT_LA    1.0835561758998615
+    Attrib ln(pk)_FFT_LX    0.9533859026998862
+    Attrib ln(pk)_FFT_LY    0.7794756172969441
+    Attrib ln(pk)_FFT_LZ    0.32341793019068005
+    Attrib ln(pk)_FFT_PTCH    1.091541380711058
+    Attrib ln(pk)_FFT_ROLL    -0.02896129432868486
+    Attrib ln(pk)_GA    -0.199265163660537
+    Attrib ln(pk)_GX    -0.17310419482143263
+    Attrib ln(pk)_GY    0.8027516390716208
+    Attrib ln(pk)_GZ    -0.4560414245099436
+    Attrib ln(pk)_G_DELT    0.7336573691929096
+    Attrib ln(pk)_G_PTCH    0.993492802380485
+    Attrib ln(pk)_G_ROLL    -0.06685921345674341
+    Attrib ln(pk)_LA    0.7504958610621842
+    Attrib ln(pk)_LX    1.0507700485933422
+    Attrib ln(pk)_LY    0.7798206911867905
+    Attrib ln(pk)_LZ    0.2772719077350891
+    Attrib ln(pk)_PTCH    1.0664628215987655
+    Attrib ln(pk)_ROLL    -0.01292925749710661
+    Attrib ln(pwr_rat)_FFT_DELT    -0.2674551560859287
+    Attrib ln(pwr_rat)_FFT_GA    0.438742350612387
+    Attrib ln(pwr_rat)_FFT_GX    0.1324058321402761
+    Attrib ln(pwr_rat)_FFT_GY    -0.7556152658292388
+    Attrib ln(pwr_rat)_FFT_GZ    0.3933365733283872
+    Attrib ln(pwr_rat)_FFT_G_DELT    -0.9123315515940268
+    Attrib ln(pwr_rat)_FFT_G_PTCH    -0.7154350214431313
+    Attrib ln(pwr_rat)_FFT_G_ROLL    0.04055326253521141
+    Attrib ln(pwr_rat)_FFT_LA    -0.37383315332206524
+    Attrib ln(pwr_rat)_FFT_LX    -1.0185327688865913
+    Attrib ln(pwr_rat)_FFT_LY    -2.132703489278844
+    Attrib ln(pwr_rat)_FFT_LZ    -0.9248014268966379
+    Attrib ln(pwr_rat)_FFT_PTCH    -0.9241621692558293
+    Attrib ln(pwr_rat)_FFT_ROLL    -0.23451804259259532
+    Attrib ln(var)_DELT    1.0092450413883784
+    Attrib ln(var)_GA    1.314996714905527
+    Attrib ln(var)_GX    1.1798353786429476
+    Attrib ln(var)_GY    2.6786665610070743
+    Attrib ln(var)_GZ    2.2777448977326826
+    Attrib ln(var)_G_DELT    1.038154228326239
+    Attrib ln(var)_G_PTCH    2.5363588475975636
+    Attrib ln(var)_G_ROLL    1.6759970762805703
+    Attrib ln(var)_LA    1.026236606740962
+    Attrib ln(var)_LX    1.1238420462177703
+    Attrib ln(var)_LY    1.2621471674606997
+    Attrib ln(var)_LZ    0.5289236427938983
+    Attrib ln(var)_PTCH    2.012407155041371
+    Attrib ln(var)_ROLL    1.2296938481060704
+    Attrib max_DELT    -0.21398834643956585
+    Attrib max_GA    -0.3340687130488676
+    Attrib max_GX    -0.43056608600650764
+    Attrib max_GY    -0.37633098526568015
+    Attrib max_GZ    -0.23455685006921834
+    Attrib max_G_DELT    -0.30786450991274883
+    Attrib max_G_PTCH    0.006365084102125606
+    Attrib max_G_ROLL    0.2896380280491844
+    Attrib max_LA    -0.22885787351650672
+    Attrib max_LX    -0.23326916311502996
+    Attrib max_LY    -0.26501820549820965
+    Attrib max_LZ    -0.2713451024577247
+    Attrib max_PTCH    0.12616684486471055
+    Attrib max_ROLL    0.374640969295303
+    Attrib mean_DELT    -0.2291214403261183
+    Attrib mean_GA    -0.3790087355001583
+    Attrib mean_GX    -0.3883525087380906
+    Attrib mean_GY    -0.29480746365559074
+    Attrib mean_GZ    -0.34965290780227704
+    Attrib mean_G_DELT    -0.1608403217968851
+    Attrib mean_G_PTCH    -0.08227901545945604
+    Attrib mean_G_ROLL    0.22930431167509185
+    Attrib mean_LA    -0.3167028651803131
+    Attrib mean_LX    0.007206750392917133
+    Attrib mean_LY    0.041791580801867824
+    Attrib mean_LZ    0.043387305976468685
+    Attrib mean_PTCH    -0.03264129296655663
+    Attrib mean_ROLL    0.22742522492449987
+    Attrib mean_abs_dev_DELT    -0.14594303171519127
+    Attrib mean_abs_dev_GA    -0.25067247628036804
+    Attrib mean_abs_dev_GX    -0.20360804470800117
+    Attrib mean_abs_dev_GY    -0.2497474935312462
+    Attrib mean_abs_dev_GZ    -0.12459764279637185
+    Attrib mean_abs_dev_G_DELT    -0.2270994678624639
+    Attrib mean_abs_dev_G_PTCH    -0.1976789463660095
+    Attrib mean_abs_dev_G_ROLL    -0.179710382070027
+    Attrib mean_abs_dev_LA    -0.2208818690041188
+    Attrib mean_abs_dev_LX    -0.2789893006516626
+    Attrib mean_abs_dev_LY    -0.2765699290426526
+    Attrib mean_abs_dev_LZ    -0.22643914494294656
+    Attrib mean_abs_dev_PTCH    -0.2445618302542127
+    Attrib mean_abs_dev_ROLL    -0.18274572838075306
+    Attrib median_DELT    -0.2592482343323542
+    Attrib median_GA    -0.459267795655872
+    Attrib median_GX    -0.445588328211381
+    Attrib median_GY    -0.3377140387511561
+    Attrib median_GZ    -0.29431376660807873
+    Attrib median_G_DELT    -0.17522724228991043
+    Attrib median_G_PTCH    -0.027406282605575812
+    Attrib median_G_ROLL    0.21915066728420865
+    Attrib median_LA    -0.282941856328005
+    Attrib median_LX    -0.04415091787462148
+    Attrib median_LY    -0.23362909789752676
+    Attrib median_LZ    0.18272314162295672
+    Attrib median_PTCH    -0.01770428437310341
+    Attrib median_ROLL    0.22250256898624085
+    Attrib min_DELT    -0.22587761360582972
+    Attrib min_GA    -0.10168623696189563
+    Attrib min_GX    0.019070360313039127
+    Attrib min_GY    -0.001036694218953773
+    Attrib min_GZ    -0.3700652899512692
+    Attrib min_G_DELT    -0.23769303971148362
+    Attrib min_G_PTCH    -0.07993769934352143
+    Attrib min_G_ROLL    0.20573037366968933
+    Attrib min_LA    -0.2816636080941046
+    Attrib min_LX    0.23433952441322056
+    Attrib min_LY    0.27281827276507736
+    Attrib min_LZ    0.23761009895413718
+    Attrib min_PTCH    -0.17919725135522216
+    Attrib min_ROLL    0.1622728831193392
+    Attrib pow_E_FFT_DELT    -0.17215643523581123
+    Attrib pow_E_FFT_GA    0.28706147936493026
+    Attrib pow_E_FFT_GX    -0.4424804529488866
+    Attrib pow_E_FFT_GY    -0.6194356254629644
+    Attrib pow_E_FFT_GZ    0.11088201958063072
+    Attrib pow_E_FFT_G_DELT    -0.03973382450783693
+    Attrib pow_E_FFT_G_PTCH    -0.5078621061007113
+    Attrib pow_E_FFT_G_ROLL    -0.46977064554922915
+    Attrib pow_E_FFT_LA    0.06761565618584443
+    Attrib pow_E_FFT_LX    -0.24057806961424802
+    Attrib pow_E_FFT_LY    -3.114270253828079
+    Attrib pow_E_FFT_LZ    -1.220981381284327
+    Attrib pow_E_FFT_PTCH    -0.18161247313578602
+    Attrib pow_E_FFT_ROLL    -1.5166895495696313
+    Attrib std_err_mean_DELT    -0.16846719313824385
+    Attrib std_err_mean_GA    -0.30378919686264405
+    Attrib std_err_mean_GX    -0.25289614623235734
+    Attrib std_err_mean_GY    -0.25105023978315866
+    Attrib std_err_mean_GZ    -0.14665753019725902
+    Attrib std_err_mean_G_DELT    -0.1958541657525929
+    Attrib std_err_mean_G_PTCH    -0.2126932327118761
+    Attrib std_err_mean_G_ROLL    -0.1910063563497404
+    Attrib std_err_mean_LA    -0.2928732928678458
+    Attrib std_err_mean_LX    -0.25539116930083205
+    Attrib std_err_mean_LY    -0.25021532127215496
+    Attrib std_err_mean_LZ    -0.27266485084150394
+    Attrib std_err_mean_PTCH    -0.18308959063128147
+    Attrib std_err_mean_ROLL    -0.17794622301663698
+    Attrib tot_E_FFT_DELT    -0.20171308142836655
+    Attrib tot_E_FFT_GA    -0.3206741790283594
+    Attrib tot_E_FFT_GX    -0.04095080474711218
+    Attrib tot_E_FFT_GY    -0.008505335186072958
+    Attrib tot_E_FFT_GZ    -1.0869134661316306
+    Attrib tot_E_FFT_G_DELT    -0.27078788245126806
+    Attrib tot_E_FFT_G_PTCH    -0.3341839244418405
+    Attrib tot_E_FFT_G_ROLL    -0.08179512730808777
+    Attrib tot_E_FFT_LA    -0.24075133254456973
+    Attrib tot_E_FFT_LX    -0.31538912237500843
+    Attrib tot_E_FFT_LY    -0.2739138426982879
+    Attrib tot_E_FFT_LZ    -0.23012184562221558
+    Attrib tot_E_FFT_PTCH    -0.2810095839891452
+    Attrib tot_E_FFT_ROLL    -0.1718984356174556
+Class laying_down
+    Input
+    Node 0
+Class sit_stand
+    Input
+    Node 1
+Class walking
+    Input
+    Node 2
+
+
+Time taken to build model: 14.91 seconds
+
+=== Evaluation on test set ===
+
+Time taken to test model on supplied test set: 1.72 seconds
+
+=== Summary ===
+
+Correctly Classified Instances       10302               95.7435 %
+Incorrectly Classified Instances       458                4.2565 %
+Kappa statistic                          0.9351
+K&B Relative Info Score            1069303.9773 %
+K&B Information Score                15623.4219 bits      1.452  bits/instance
+Class complexity | order 0           17447.8924 bits      1.6216 bits/instance
+Class complexity | scheme             2629.4186 bits      0.2444 bits/instance
+Complexity improvement     (Sf)      14818.4737 bits      1.3772 bits/instance
+Mean absolute error                      0.0596
+Root mean squared error                  0.1591
+Relative absolute error                 13.827  %
+Root relative squared error             33.2456 %
+Total Number of Instances            10760     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0.924    0.010    0.980      0.924    0.951      0.928    0.988     0.984     laying_down
+                 0.981    0.058    0.917      0.981    0.948      0.914    0.979     0.936     sit_stand
+                 0.965    0.002    0.995      0.965    0.980      0.973    0.999     0.999     walking
+Weighted Avg.    0.957    0.027    0.959      0.957    0.958      0.934    0.988     0.969     
+
+=== Confusion Matrix ===
+
+    a    b    c   <-- classified as
+ 3362  278    0 |    a = laying_down
+   68 4175   13 |    b = sit_stand
+    0   99 2765 |    c = walking
+

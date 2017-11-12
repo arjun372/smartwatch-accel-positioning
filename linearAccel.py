@@ -33,8 +33,8 @@ def plot5D(title, t, x, y, z, a, s):
     plt.figure(nFigures)
     plt.title(title)
     plt.figure(nFigures).gca().get_xaxis().get_major_formatter().set_scientific(False)
-    plt.plot(t,x,'r',t,y,'g',t,z,'b',t,a,'k', t, s, 'k.',alpha=0.6)
-    plt.legend(['X', 'Y', 'Z', 'A'], loc='best')
+    plt.plot(t,x,'r',t,y,'g',t,z,'b',t,a,'k', t, s, 'c',alpha=0.6)
+    plt.legend(['X', 'Y', 'Z', 'A', 'A2'], loc='best')
     plt.grid()
 
 def plotFFT(title, xf, yf):
@@ -74,8 +74,8 @@ if __name__ == "__main__":
     x = df['aX']
     y = df['aY']
     z = df['aZ']
+    a = df['aA']
     l = df['class']
-    a = np.hypot(x, np.hypot(y, z))
 
     # window = int(fs*10)
     # t = t[:window]
@@ -88,18 +88,19 @@ if __name__ == "__main__":
 
     plot5D("Raw acceleration", t, x, y, z, a, l)
 
-    LT, LX, LY, LZ, LA = angles.linearize(t=t, x=x, y=y, z=z, cutoff=1.0, fs=fs,  order=1)
-    plot5D("Linear acceleration", LT, LX, LY, LZ, LA, l)
+    LX, LY, LZ, LA, LA2 = angles.linearize(x=x, y=y, z=z, a=a, cutoff=1.0, fs=fs,  order=1)
+    plot5D("Linear acceleration", t, LX, LY, LZ, LA, LA2)
 
-    GT, GX, GY, GZ, GA = angles.gravity(t=t, x=x, y=y, z=z, cutoff=float(args.gcutoff), fs=fs, order=int(args.gorder))
-    plot5D("Gravity from Low-Pass filter", GT, GX, GY, GZ, GA, l)
+    GX, GY, GZ, GA, GA2 = angles.gravity(x=x, y=y, z=z, a=a, cutoff=float(args.gcutoff), fs=fs, order=int(args.gorder))
+    plot5D("Gravity from Low-Pass filter", t, GX, GY, GZ, GA, GA2)
 
     pitch, roll = angles.pitch_roll(x, y, z)
-    deltas = angles.get_angle_changes(x.tolist(), y.tolist(), z.tolist())
+    deltas = angles.get_angle_changes(x.tolist(), y.tolist(), z.tolist(), a.tolist())
     plotAngles("Pitch & Roll & Angle Deltas", t, pitch, roll, deltas, l)
 
+    #for val in deltas: print val
     Gpitch, Groll = angles.pitch_roll(GX, GY, GZ)
-    Gdeltas = angles.get_angle_changes(GX, GY, GZ)
-    plotAngles("Low-Passed - Pitch & Roll & Angle Deltas", GT, Gpitch, Groll, Gdeltas, l)
+    Gdeltas = angles.get_angle_changes(GX, GY, GZ, GA2)
+    plotAngles("Low-Passed - Pitch & Roll & Angle Deltas", t, Gpitch, Groll, Gdeltas, l)
 
     plt.show()
