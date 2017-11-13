@@ -8,13 +8,13 @@ def plotDWT(x, data):
     #x = pylab.arange(0, 1, 1. / 512)
     #data = pylab.sin((5 * 50 * pylab.pi * x ** 2))
 
-    wavelet = 'db2'
-    level = 5
+    wavelet = 'coif3'
+    level = 3
     order = "freq"  # "normal"
     interpolation = 'nearest'
-    cmap = cm.cool
+    cmap = cm.inferno
     data = data.tolist()
-    wp = pywt.WaveletPacket(data, wavelet, 'sym', maxlevel=level)
+    wp = pywt.WaveletPacket(data, wavelet=wavelet, mode='symmetric', maxlevel=level)
     nodes = wp.get_level(level, order=order)
     labels = [n.path for n in nodes]
     values = pylab.array([n.data for n in nodes], 'd')
