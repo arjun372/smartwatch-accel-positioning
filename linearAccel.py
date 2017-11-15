@@ -78,7 +78,7 @@ if __name__ == "__main__":
     l = df['class']
 
     offset = 0
-    window = 2390#int(fs*10) + offset
+    window = int(fs*10) + offset
     t = t[offset:window]
     x = x[offset:window]
     y = y[offset:window]
@@ -87,22 +87,22 @@ if __name__ == "__main__":
     a = a[offset:window]
 
 
-    # plot5D("Raw acceleration", t, x, y, z, a, l)
-    #
+    plot5D("Raw acceleration", t, x, y, z, a, l)
+
     LX, LY, LZ, LA, LA2 = angles.linearize(x=x, y=y, z=z, a=a, cutoff=1.0, fs=fs,  order=1)
-    # plot5D("Linear acceleration", t, LX, LY, LZ, LA, LA2)
-    #
-    # GX, GY, GZ, GA, GA2 = angles.gravity(x=x, y=y, z=z, a=a, cutoff=float(args.gcutoff), fs=fs, order=int(args.gorder))
-    # plot5D("Gravity from Low-Pass filter", t, GX, GY, GZ, GA, GA2)
-    #
+    plot5D("Linear acceleration", t, LX, LY, LZ, LA, LA2)
+
+    GX, GY, GZ, GA, GA2 = angles.gravity(x=x, y=y, z=z, a=a, cutoff=float(args.gcutoff), fs=fs, order=int(args.gorder))
+    plot5D("Gravity from Low-Pass filter", t, GX, GY, GZ, GA, GA2)
+
     pitch, roll = angles.pitch_roll(x, y, z)
-    # deltas = angles.get_angle_changes(x.tolist(), y.tolist(), z.tolist(), a.tolist())
-    # plotAngles("Pitch & Roll & Angle Deltas", t, pitch, roll, deltas, l)
-    #
-    # #for val in deltas: print val
-    # Gpitch, Groll = angles.pitch_roll(GX, GY, GZ)
-    # Gdeltas = angles.get_angle_changes(GX, GY, GZ, GA2)
-    # plotAngles("Low-Passed - Pitch & Roll & Angle Deltas", t, Gpitch, Groll, Gdeltas, l)
+    deltas = angles.get_angle_changes(x.tolist(), y.tolist(), z.tolist(), a.tolist())
+    plotAngles("Pitch & Roll & Angle Deltas", t, pitch, roll, deltas, l)
+
+    #for val in deltas: print val
+    Gpitch, Groll = angles.pitch_roll(GX, GY, GZ)
+    Gdeltas = angles.get_angle_changes(GX, GY, GZ, GA2)
+    plotAngles("Low-Passed - Pitch & Roll & Angle Deltas", t, Gpitch, Groll, Gdeltas, l)
 
     plotdwt.plotDWT(t, a)
     plt.show()
