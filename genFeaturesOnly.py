@@ -169,8 +169,10 @@ if __name__ == "__main__":
     parser.add_argument('-O','--overlap', dest='overlap', help = "sliding window overlap", required=True)
     parser.add_argument('-f','--samplingrate', dest='fs', help = "interpolation sampling rate", required=True)
     parser.add_argument('-w','--windowlen', dest='windowlen', help = "window length in seconds", required=True)
+    parser.add_argument('-n','--num_cores', dest='ncores', help = "number of cores to use, maxes out at CPU_COUNT", required=False)
     args, leftovers = parser.parse_known_args()
 
+    
     # Import CSVs into list of dataframes.
     # We assume that each CSV contains a continous stream of data, and the
     # separate CSVs are disjoint

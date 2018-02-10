@@ -3,3 +3,5 @@
 
 *.arff
 *.arff.gz
+
+.AppleDouble
