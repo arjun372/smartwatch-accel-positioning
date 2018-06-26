@@ -252,7 +252,8 @@ def getMajorityLabel_Nominal(data):
     assisted = ['hemi', 'four-leg-walker', 'single-leg-walker', 'crutches', 'walker']
     moving = ['running', 'walking', 'flat', 'downstairs', 'upstairs']
     stationary = ['stationary', 'sitting', 'standing', 'laying_down']
-    sit_stand = ['sitting', 'standing', 'showering']
+    standing_types = ['standing', 'showering']
+    sitting_types = ['sitting']
     l = data.tolist()
 
     # Else, check for the majority label
@@ -277,8 +278,12 @@ def getMajorityLabel_Nominal(data):
             l2.append('walking')
             continue
 
-        if s in sit_stand:
-            l2.append('sit_stand')
+        if s in standing_types:
+            l2.append('stand')
+            continue
+
+        if s in sitting_types:
+            l2.append('sitting')
             continue
 
         else:
